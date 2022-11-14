@@ -15,7 +15,7 @@ module.exports = {
   devtool: 'inline-source-map',
   devServer: {
     historyApiFallback: true, // MEMO
-    static: path.join(__dirname, 'dist'),
+    static: path.join(__dirname, 'public'),
     compress: true,
     port: 3000,
   },

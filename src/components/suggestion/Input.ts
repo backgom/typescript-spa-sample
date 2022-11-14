@@ -1,20 +1,17 @@
 class Input {
-  private _element;
-  constructor({ onChange }: any) {
-    this._element = document.createElement('input');
-    this._element.type = 'text';
-    this._element.placeholder = '값을 입력하세요.';
-    this._element.addEventListener('keyup', () => {
-      onChange();
+  private _target;
+  constructor(props?: any) {
+    this._target = document.createElement('input') as HTMLInputElement;
+    this._target.type = 'text';
+    this._target.value = props.input;
+    this._target.placeholder = '값을 입력하세요.';
+    this._target.addEventListener('keyup', () => {
+      props.onChange(this._target.value);
     });
   }
 
-  getElement() {
-    return this._element;
-  }
-
   render(): HTMLElement {
-    return this._element;
+    return this._target;
   }
 }
 
