@@ -1,11 +1,13 @@
 import IPlugin from './common/IPlugin';
+import Router from './plugins/Router';
+import routes from './routers';
 
 class App {
-  private _app: any;
+  private _root: HTMLElement | null;
   private _plugin: any[];
 
   constructor() {
-    this._app = null;
+    this._root = null;
     this._plugin = [];
   }
 
@@ -13,19 +15,20 @@ class App {
     this._plugin.push(plugin);
   }
 
-  render() {
+  private routing() {
     const [router] = this._plugin.filter((plugin: any) => {
       return plugin.getPluginName() === 'router';
     });
 
-    const html = router.getHtml();
-    if (typeof html === 'string') {
-      this._app.innerHTML = html;
+    if (typeof router !== 'object') {
+      return;
     }
+
+    router.run();
   }
 
   mount(id: string) {
-    this._app = document.querySelector(id);
+    this._root = document.querySelector(id);
 
     window.addEventListener('DOMContentLoaded', () => {
       document.body.addEventListener('click', (e) => {
@@ -33,17 +36,17 @@ class App {
 
         const target = e.target as HTMLAnchorElement;
 
-        if (target.getAttribute('href')) {
+        if (target.matches('[data-link]')) {
           history.pushState(null, '', target.href);
-          this.render();
+          this.routing();
         }
       });
 
       window.addEventListener('popstate', () => {
-        this.render();
+        this.routing();
       });
 
-      this.render();
+      this.routing();
     });
   }
 }

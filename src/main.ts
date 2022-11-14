@@ -1,5 +1,5 @@
 import App from './App';
-import Router from './Router';
+import Router from './plugins/Router';
 import routes from './routers';
 
 const app = new App();

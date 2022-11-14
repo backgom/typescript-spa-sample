@@ -1,6 +1,6 @@
 class Input {
   private _element;
-  constructor(onChange: any) {
+  constructor({ onChange }: any) {
     this._element = document.createElement('input');
     this._element.type = 'text';
     this._element.placeholder = '값을 입력하세요.';
@@ -13,7 +13,7 @@ class Input {
     return this._element;
   }
 
-  render() {
+  render(): HTMLElement {
     return this._element;
   }
 }
