@@ -1,12 +1,23 @@
 .box {
-  border-radius: 0.5rem;
-  border: 1px solid red;
-  width: 10em;
-  min-height: 3em;
-  margin: 0.5rem 0;
-  display: none;
+  /* width: 15em; */
+  height: 0;
+  text-indent: 0.3rem;
+  visibility: hidden;
+  box-sizing: border-box;
 }
 
 .box.show {
-  display: block;
+  visibility: visible;
+  border-radius: 0.5rem;
+  border: 1px solid red;
+  min-height: 1rem;
+  height: initial;
+  margin: 0.5rem 0;
+  padding: 0.5rem;
+}
+
+.box > div:focus {
+  outline: none;
+  border: 1px solid green;
+  
 }
